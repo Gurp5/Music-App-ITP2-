@@ -22,8 +22,9 @@ function setup(){
 	 //create a new visualisation container and add visualisations
 	 vis = new Visualisations();
 	 vis.add(new Character());
-	 vis.add(new Wallpaper());
-	 vis.add(new Geometric());
+	 vis.add(new Needles());
+	 vis.add(new Spectrum());
+	 vis.add(new Wavepattern());
 
 }
 
