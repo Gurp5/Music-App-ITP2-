@@ -12,6 +12,7 @@ function preload(){
 }
 
 function setup(){
+	
 	 createCanvas(windowWidth, windowHeight);
 	 background(0);
 	 controls = new ControlsAndInput();
@@ -25,14 +26,18 @@ function setup(){
 	 vis.add(new Spectrum());
 	 vis.add(new WavePattern());
 
+
 }
 
 function draw(){
+  
+	
 	background(0);
 	//draw the selected visualisation
 	vis.selectedVisual.draw();
 	//draw the controls on top.
 	controls.draw();
+	
 }
 
 function mouseClicked(){
