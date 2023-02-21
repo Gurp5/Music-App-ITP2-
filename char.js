@@ -1,40 +1,74 @@
 function Character(){
 	this.name = "character";
+	this.output = [];
 	var s = 0;
-	var output = [];
-	this.func = function(){
+	this.x = 100;
+	this.yend = 100;
+	this.ystart = height - this.yend;
+	this.m = width - (this.x * 2);
+	this.speed = 0.4;
 
-		if(s % 100 == 0){
 	
-			output.push([{ x:x, y:ystart }, { x:(x + m), y:ystart }]);
 	
-		}
+	this.func = function(){
+		var bigscale = 50;
+		var smallscale = 5;
+		var output_wave = [];
+		var wave = fourier.waveform();
+			
+			for(i = 0; i < wave.length; i++){
+
+				if(i % 25 == 0){
+					
+					var x1 = map(i, 0, 1024, this.x, this.x+this.m)
+					
+					
+					if(i < 1024 * 0.25 || i > 1024 * 0.75){
+						var y1 = map(wave[i], -1, 1, -smallscale, smallscale)
+						output_wave.push({x: x1, y: this.ystart+ y1})
+
+					}
+					else{
+						var y1 = map(wave[i], -1, 1, -bigscale, bigscale)
+						output_wave.push({x: x1, y: this.ystart+ y1})
+					
+					};
+				
+				}
+
+
+			}
+	
+		
+		this.output.push(output_wave);
+
 	}
 
 	
 	this.draw = function(){
 		
-		x = 100;
-		yend = 100;
-		ystart = height - yend;
-		m = width - (x * 2);
-		speed = 0.4;
-		s += 2;
-		this.func()
+		s += 0.5
+		
+
+		
+		
+		if (s % 50 == 0){
+			this.func()
+		}
 		push()
 		
 		stroke(255);
 		strokeWeight(2);
 		
-		for(var i = 0; i < output.length; i++){
+		for(var i = 0; i < this.output.length; i++){
 
-			var o = output[i]
+			var o = this.output[i]
 
 			beginShape()
-			
+			noFill();
 			for(var j = 0; j < o.length; j++){
 				
-				o[j].y -= speed; 
+				o[j].y -= this.speed; 
 
 				vertex(o[j].x, o[j].y);
 
@@ -42,9 +76,9 @@ function Character(){
 
 			endShape();
 			
-			if(o[0].y < yend){
+			if(o[0].y < this.yend){
 
-				output.splice(i, 1);
+				this.output.splice(i, 1);
 
 			}
 			

@@ -9,6 +9,7 @@ var fourier;
 
 function preload(){
 	sound = loadSound('assets/Jonas Hipper - LoFi Streets.mp3');
+	sound.setVolume(0.7);
 }
 
 function setup(){
@@ -19,6 +20,7 @@ function setup(){
 
 	 //instantiate the fft object
 	 fourier = new p5.FFT();
+	
 
 	 //create a new visualisation container and add visualisations
 	 vis = new Visualisations();
