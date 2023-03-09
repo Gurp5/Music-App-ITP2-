@@ -7,20 +7,24 @@ var sound = null;
 //variable for p5 fast fourier transform
 var fourier;
 
+
+
 function preload(){
 	sound = loadSound('assets/Jonas Hipper - LoFi Streets.mp3');
 	sound.setVolume(0.7);
+
+	
+	
 }
 
 function setup(){
 	
-	 createCanvas(windowWidth, windowHeight);
+	 canv = createCanvas(windowWidth, windowHeight);
 	 background(0);
 	 controls = new ControlsAndInput();
 
 	 //instantiate the fft object
 	 fourier = new p5.FFT();
-	
 
 	 //create a new visualisation container and add visualisations
 	 vis = new Visualisations();
@@ -35,6 +39,11 @@ function draw(){
   
 	
 	background(0);
+	fill(100,100,1)
+	time = sound.duration();
+	textFont('GCopperplate, Papyrus, fantasy');
+	text("Length of song: "+time, width/2, 50)
+	
 	//draw the selected visualisation
 	vis.selectedVisual.draw();
 	//draw the controls on top.

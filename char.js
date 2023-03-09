@@ -1,9 +1,9 @@
 function Character(){
 	this.name = "character";
 	this.output = [];
-	var s = 0;
+	let s = 0;
 	this.x = 100;
-	this.yend = 100;
+	this.yend = 200;
 	this.ystart = height - this.yend;
 	this.m = width - (this.x * 2);
 	this.speed = 0.4;
@@ -11,25 +11,25 @@ function Character(){
 	
 	
 	this.func = function(){
-		var bigscale = 50;
-		var smallscale = 5;
-		var output_wave = [];
-		var wave = fourier.waveform();
+		let bigscale = 50;
+		let smallscale = 5;
+		let output_wave = [];
+		let wave = fourier.waveform();
 			
-			for(i = 0; i < wave.length; i++){
+			for(i in wave){
 
 				if(i % 25 == 0){
 					
-					var x1 = map(i, 0, 1024, this.x, this.x+this.m)
+					let x1 = map(i, 0, 1024, this.x, this.x+this.m)
 					
 					
 					if(i < 1024 * 0.25 || i > 1024 * 0.75){
-						var y1 = map(wave[i], -1, 1, -smallscale, smallscale)
+						let y1 = map(wave[i], -1, 1, -smallscale, smallscale)
 						output_wave.push({x: x1, y: this.ystart+ y1})
 
 					}
 					else{
-						var y1 = map(wave[i], -1, 1, -bigscale, bigscale)
+						let y1 = map(wave[i], -1, 1, -bigscale, bigscale)
 						output_wave.push({x: x1, y: this.ystart+ y1})
 					
 					};
@@ -52,21 +52,22 @@ function Character(){
 
 		
 		
-		if (s % 50 == 0){
+		if (s % 40 == 0 ){
 			this.func()
 		}
+		if(sound.isPlaying()){
 		push()
 		
 		stroke(255);
-		strokeWeight(2);
+		strokeWeight(3);
 		
-		for(var i = 0; i < this.output.length; i++){
+		for(i in this.output){
 
 			var o = this.output[i]
 
 			beginShape()
 			noFill();
-			for(var j = 0; j < o.length; j++){
+			for(j in o){
 				
 				o[j].y -= this.speed; 
 
@@ -85,6 +86,7 @@ function Character(){
 		}
 		
 		pop();
+	}
 	};
 	
 }

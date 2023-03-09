@@ -47,6 +47,7 @@ function ControlsAndInput(){
 		fill("white");
 		stroke("black");
 		strokeWeight(2);
+		textFont('GCopperplate, Papyrus, fantasy');
 		textSize(34);
 
 		//playback button 
@@ -54,7 +55,7 @@ function ControlsAndInput(){
 		//only draw the menu if menu displayed is set to true.
 		if(this.menuDisplayed){
 
-			text("Select a visualisation:", 100, 30);
+			text("Select a visualisation you want displayed:", 100, 30);
 			this.menu();
 		}	
 		pop();
@@ -67,8 +68,8 @@ function ControlsAndInput(){
 		for(i = 0; i < vis.visuals.length; i++)
 		{
 
-			const visno = 1 * i + 1;
-			text(visno +" "+ vis.visuals[i].name, 100, 70 + i * 40); 
+			//const visno = 1 * i + 1;
+			text(" "+ vis.visuals[i].name, 100, 70 + i * 40); 
 		
 
 		};

@@ -6,7 +6,7 @@ function PlaybackButton(){
 	this.width = 20;
 	this.height = 20;
 
-	//flag to determine whether to play or pause after button click and
+	//flag to determine whether to play, stop or pause after button click and
 	//to determine which icon to draw
 	this.playing = false;
 
@@ -14,25 +14,55 @@ function PlaybackButton(){
 		if(this.playing){
 			rect(this.x, this.y, this.width/2 - 2, this.height);
 			rect(this.x + (this.width/2 + 2), this.y, this.width/2 - 2, this.height);
-		}
-		else{	
-			triangle(this.x, this.y, this.x + this.width, this.y + this.height/2, this.x, this.y+this.height);
 
+			rect(this.x + (this.width +20), this.y, this.width, this.height)
+
+		
 		}
+	
+		else{	
+			
+			triangle(this.x, this.y, this.x + this.width, this.y + this.height/2, this.x, this.y+this.height);
+		}
+			
+		
+
+
+				
+			
+	
 	};
 
 	//checks for clicks on the button, starts or pauses playabck.
 	//@returns true if clicked false otherwise.
 	this.hitCheck = function(){
+	
 		if(mouseX > this.x && mouseX < this.x + this.width && mouseY > this.y && mouseY < this.y + this.height){
 			if (sound.isPlaying()) {
+			
     			sound.pause();
-  			} else {
+
+  			} 
+			
+			else {
+			
     			sound.loop();
+
   			}
+			
   			this.playing = !this.playing;
   			return true;
 		}
+		
+		//extra button for stop
+
+		if(mouseX > (this.x + (this.width+ this.x)) && mouseX < (this.x + (this.width+ this.x)) + this.width && mouseY > this.y && mouseY < this.y + this.height && sound.isPlaying())
+		{ 
+			sound.stop();
+			this.playing = !this.playing;
+			return true;
+		}
+
 			return false;
 	};
 
